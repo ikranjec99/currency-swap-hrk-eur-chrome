@@ -1,4 +1,4 @@
 export interface Props {
-    countryCode: string;
+    shortCode: string;
     size: number;
 }

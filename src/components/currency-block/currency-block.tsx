@@ -5,12 +5,12 @@ import { CurrencyTitle } from "../currency-title/currency-title";
 import "./index.css";
 
 export const CurrencyBlock = (props: Props) => {
-  const { countryCode, name } = props.currency;
+  const { shortCode, name } = props.currency;
 
   return (
     <>
       <div className={"currency-block"}>
-        <CurrencyImage countryCode={countryCode} size={40} />
+        <CurrencyImage shortCode={shortCode} size={40} />
         <CurrencyTitle currencyName={name} />
       </div>
     </>

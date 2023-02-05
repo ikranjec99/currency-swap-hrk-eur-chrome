@@ -1,3 +1,3 @@
-export const fetchCountryLogo = (countryCode: string) => {
-    return `/logo-${countryCode}.png`;
+export const fetchCountryLogo = (shortCode: string) => {
+    return `/logo-${shortCode}.png`;
 }

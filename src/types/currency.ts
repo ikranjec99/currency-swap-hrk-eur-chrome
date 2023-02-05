@@ -1,4 +1,4 @@
 export type Currency = {
-    countryCode: string;
+    shortCode: string;
     name: string;
 }
