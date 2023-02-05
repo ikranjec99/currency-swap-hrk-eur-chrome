@@ -5,9 +5,17 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-width: 400px;
+  min-height: 600px;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+@font-face {
+  font-family: 'RobotoFlexRegular';
+  src: local("RobotoFlexRegular"),
+  url("./fonts/RobotoFlexRegular.ttf") format("truetype");
 }
