@@ -1,32 +1,45 @@
-import { useState } from 'react';
+import { Component, useContext } from "react";
 import { CurrencyBlock } from "../../components/currency-block/currency-block";
+import { CurrencyInput } from "../../components/currency-input/curency-input";
 import { ArrowsHorizontal } from "../../components/icons/arrows-horizontal";
 import { Space } from "../../components/space/space";
-import { Currency } from "../../types/currency";
+import { MainPageContext } from "./context";
+import { MainPageContextProvider } from "./context/main";
 
-import "./index.css"
+import "./index.css";
 
-const currencyHRK: Currency = { shortCode: 'hr', name: "HRK" }
-const currencyEUR: Currency = { shortCode: "eur", name: "EUR" }
+interface Props {
+  children?: any;
+}
 
-export const Main = () => {
-  const [primaryCurrency, setPrimaryCurrency] = useState<Currency>(currencyEUR);
-  const [secondaryCurrency, setSecondaryCurrency] = useState<Currency>(currencyHRK);
-
-  const switchCurrencies = () => {
-    const primary = primaryCurrency;
-    const secondary = secondaryCurrency;
-    setSecondaryCurrency(primaryCurrency);
-    setPrimaryCurrency(secondaryCurrency);
+export class MainPage extends Component<Props> {
+  render() {
+    return (
+      <MainPageContextProvider {...this.props}>
+        <Main />
+      </MainPageContextProvider>
+    )
   }
+}
+
+const Main = () => {
+  const {
+    actions: { switchCurrencies },
+    store: { primaryCurrency, secondaryCurrency }
+  } = useContext(MainPageContext);
 
   return (
-    <div className={'main'}>
-      <CurrencyBlock currency={primaryCurrency} />
-      <Space space={10} />
-      <ArrowsHorizontal onClick={switchCurrencies} size={25} />
-      <Space space={10} />
-      <CurrencyBlock currency={secondaryCurrency} />
-    </div>
-  )
+    <>
+      <div className={"main"}>
+        <CurrencyBlock currency={primaryCurrency} />
+        <Space space={10} />
+        <ArrowsHorizontal size={20} onClick={switchCurrencies} />
+        <Space space={10} />
+        <CurrencyBlock currency={secondaryCurrency} />
+      </div>
+      <div className={'currency-input'}>
+        <CurrencyInput />
+      </div>
+    </>
+  );
 };
