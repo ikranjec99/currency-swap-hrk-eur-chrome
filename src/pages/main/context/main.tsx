@@ -6,6 +6,7 @@ import { MainPageContext } from ".";
 
 const primaryCurrency: Currency = data[0];
 const secondaryCurrency: Currency = data[1];
+const fixedEurToHrk = 7.53450;
 
 interface Props {
     children?: any;
@@ -19,16 +20,38 @@ export interface State {
 export interface Store {
     primaryCurrency: Currency;
     secondaryCurrency: Currency;
+    currentNumericValue: number;
+    convertedNumericValue: number;
 }
 
 export interface Actions {
     switchCurrencies(): void;
+    updateCurrencyNumericValue(value: number): void;
+    convertNumericValue(currentNumericValue: number, desiredCurrency: Currency): number;
 }
 
 export class MainPageContextProvider extends React.Component<Props, State> {
     switchCurrencies = () => {
         this.updateStore({ primaryCurrency: this.state.store.secondaryCurrency });
         this.updateStore({ secondaryCurrency: this.state.store.primaryCurrency });
+    }
+
+    updateCurrencyNumericValue = async (value: number) => {
+        this.updateStore({ currentNumericValue: value });
+    }
+
+    convertNumericValue = (currentNumericValue: number, desiredCurrency: Currency) => {
+        // EUR TO HRK
+        if (desiredCurrency.name === primaryCurrency.name) {
+            return Number((currentNumericValue * fixedEurToHrk).toFixed(2));
+        }
+
+        // HRK TO EUR
+        if (desiredCurrency.name === secondaryCurrency.name) {
+            return Number((currentNumericValue / fixedEurToHrk).toFixed(2));
+        }
+
+        return 0;
     }
 
     updateStore = (changed: Partial<Store>, callback?: () => void) => {
@@ -41,10 +64,14 @@ export class MainPageContextProvider extends React.Component<Props, State> {
     state: State = {
         store: {
             primaryCurrency: primaryCurrency,
-            secondaryCurrency: secondaryCurrency
+            secondaryCurrency: secondaryCurrency,
+            currentNumericValue: 0,
+            convertedNumericValue: 0
         },
         actions: {
-            switchCurrencies: this.switchCurrencies
+            switchCurrencies: this.switchCurrencies,
+            updateCurrencyNumericValue: this.updateCurrencyNumericValue,
+            convertNumericValue: this.convertNumericValue
         }
     };
 

@@ -1,5 +1,14 @@
-.main, .currency-input {
-    align-items: center;
-    display: flex;
-    margin: 20px;
+.main,
+.currency-input {
+  align-items: center;
+  display: flex;
+  margin: 20px;
+}
+
+.input-1 {
+  margin-left: 2px;
+}
+
+.input-2 {
+  margin-left: 60px;
 }

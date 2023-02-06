@@ -1,6 +1,7 @@
 import { Component, useContext } from "react";
+
+import CurrencyInput from "react-currency-input-field";
 import { CurrencyBlock } from "../../components/currency-block/currency-block";
-import { CurrencyInput } from "../../components/currency-input/curency-input";
 import { ArrowsHorizontal } from "../../components/icons/arrows-horizontal";
 import { Space } from "../../components/space/space";
 import { MainPageContext } from "./context";
@@ -18,14 +19,14 @@ export class MainPage extends Component<Props> {
       <MainPageContextProvider {...this.props}>
         <Main />
       </MainPageContextProvider>
-    )
+    );
   }
 }
 
 const Main = () => {
   const {
-    actions: { switchCurrencies },
-    store: { primaryCurrency, secondaryCurrency }
+    actions: { switchCurrencies, updateCurrencyNumericValue, convertNumericValue },
+    store: { primaryCurrency, secondaryCurrency, currentNumericValue },
   } = useContext(MainPageContext);
 
   return (
@@ -37,8 +38,27 @@ const Main = () => {
         <Space space={10} />
         <CurrencyBlock currency={secondaryCurrency} />
       </div>
-      <div className={'currency-input'}>
-        <CurrencyInput />
+      <div className={"currency-input"}>
+        <CurrencyInput
+          className={'input-1'}
+          placeholder="Please enter a number"
+          defaultValue={1000}
+          decimalsLimit={2}
+          maxLength={8}
+          value={currentNumericValue || 0}
+          prefix={primaryCurrency.name}
+          onValueChange={(value: any, name: any) => updateCurrencyNumericValue(value)}
+        />
+        <CurrencyInput
+          className={'input-2'}
+          placeholder="Please enter a number"
+          defaultValue={1000}
+          decimalsLimit={2}
+          maxLength={8}
+          value={convertNumericValue(currentNumericValue, secondaryCurrency)}
+          prefix={secondaryCurrency.name}
+          onValueChange={(value: any, name: any) => updateCurrencyNumericValue(value)}
+        />
       </div>
     </>
   );
