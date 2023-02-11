@@ -5,10 +5,15 @@
   margin: 20px;
 }
 
+.input-1, .input-2 {
+  border-radius: 5px;
+  width: 160px !important;
+}
+
 .input-1 {
-  margin-left: 2px;
+  margin-left: 1px;
 }
 
 .input-2 {
-  margin-left: 60px;
+  margin-left: 65px;
 }
