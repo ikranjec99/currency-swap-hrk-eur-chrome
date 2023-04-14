@@ -1,12 +1,7 @@
 import React from "react";
 
-import { Currency } from "../../../types/currency";
-import data from '../../../data/currencies.json';
+import { Currency } from "../../../types/ui";
 import { MainPageContext } from ".";
-
-const primaryCurrency: Currency = data[0];
-const secondaryCurrency: Currency = data[1];
-const fixedEurToHrk = 7.53450;
 
 interface Props {
     children?: any;
@@ -18,10 +13,11 @@ export interface State {
 }
 
 export interface Store {
+    convertedNumericValue: number;
+    currentNumericValue: number;
+    fixedRate: number; // 7.53450 HRK = 1 EUR
     primaryCurrency: Currency;
     secondaryCurrency: Currency;
-    currentNumericValue: number;
-    convertedNumericValue: number;
 }
 
 export interface Actions {
@@ -31,6 +27,18 @@ export interface Actions {
 }
 
 export class MainPageContextProvider extends React.Component<Props, State> {
+    readonly fixedRate: number = 7.53450;
+
+    readonly primaryCurrency: Currency = {
+        name: 'HRK',
+        shortCode: "hr"
+    }
+
+    readonly secondaryCurrency: Currency = {
+        name: "EUR",
+        shortCode: "eur"
+    }
+
     switchCurrencies = () => {
         this.updateStore({ primaryCurrency: this.state.store.secondaryCurrency });
         this.updateStore({ secondaryCurrency: this.state.store.primaryCurrency });
@@ -42,13 +50,13 @@ export class MainPageContextProvider extends React.Component<Props, State> {
 
     convertNumericValue = (currentNumericValue: number, desiredCurrency: Currency) => {
         // EUR TO HRK
-        if (desiredCurrency.name === primaryCurrency.name) {
-            return Number((currentNumericValue * fixedEurToHrk).toFixed(2));
+        if (desiredCurrency.name === this.primaryCurrency.name) {
+            return Number((currentNumericValue * this.fixedRate).toFixed(2));
         }
 
         // HRK TO EUR
-        if (desiredCurrency.name === secondaryCurrency.name) {
-            return Number((currentNumericValue / fixedEurToHrk).toFixed(2));
+        if (desiredCurrency.name === this.secondaryCurrency.name) {
+            return Number((currentNumericValue / this.fixedRate).toFixed(2));
         }
 
         return 0;
@@ -63,10 +71,11 @@ export class MainPageContextProvider extends React.Component<Props, State> {
 
     state: State = {
         store: {
-            primaryCurrency: primaryCurrency,
-            secondaryCurrency: secondaryCurrency,
+            convertedNumericValue: 0,
             currentNumericValue: 0,
-            convertedNumericValue: 0
+            fixedRate: this.fixedRate,
+            primaryCurrency: this.primaryCurrency,
+            secondaryCurrency: this.secondaryCurrency,
         },
         actions: {
             switchCurrencies: this.switchCurrencies,

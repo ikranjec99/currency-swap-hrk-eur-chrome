@@ -1,6 +1,9 @@
-import { Icon } from "../../../types/icon";
-
 import "./index.css"
+
+interface Icon {
+  size: number;
+  onClick(): void;
+}
 
 export const ArrowsHorizontal = (props: Icon) => {
   const { size, onClick } = props;
