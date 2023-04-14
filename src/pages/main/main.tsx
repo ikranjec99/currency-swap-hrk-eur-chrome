@@ -2,7 +2,7 @@ import { Component, useContext } from "react";
 
 import CurrencyInput from "react-currency-input-field";
 import { CurrencyBlock } from "../../components/currency-block/currency-block";
-import { ArrowsHorizontal } from "../../components/icons/arrows-horizontal";
+import { ArrowsHorizontal } from "../../components/icons/arrows-horizontal/arrows-horizontal";
 import { Space } from "../../components/space/space";
 import { MainPageContext } from "./context";
 import { MainPageContextProvider } from "./context/main";

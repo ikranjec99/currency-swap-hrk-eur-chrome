@@ -1,4 +1,4 @@
-import { Currency } from "../../types/currency";
+import { Currency } from "../../types/ui";
 
 export interface Props {
     currency: Currency
