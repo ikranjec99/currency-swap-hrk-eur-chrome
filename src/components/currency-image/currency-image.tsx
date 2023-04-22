@@ -4,8 +4,9 @@ import { fetchCountryLogo } from "../../utils/fetch-logo"
 import "./index.css"
 
 export const CurrencyImage = (props: Props) => {
-    const logo = fetchCountryLogo(props.shortCode);
     const { shortCode, size } = props;
+    
+    const logo = fetchCountryLogo(shortCode);
 
     return (
         <img 
