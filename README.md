@@ -4,6 +4,10 @@
 
 Small and light chrome extension for quick conversion from EUR to HRK.
 
+![Converting EUR to HRK](/docs/img/1.png "Converting EUR to HRK")
+
+![Converting HRK to EUR](/docs/img/2.png "Convering HRK to EUR")
+
 ## Getting Started
 
 ### Dependencies
