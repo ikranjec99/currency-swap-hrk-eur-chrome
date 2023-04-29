@@ -38,7 +38,7 @@ Common problems or issues.
 
 ## Authors
 
-[@IvanKranjec](https://www.linkedin.com/in/ivan-kranjec-96352a1b7)
+[Ivan Kranjec](https://www.linkedin.com/in/ivan-kranjec-96352a1b7)
 
 ## Version History
 
