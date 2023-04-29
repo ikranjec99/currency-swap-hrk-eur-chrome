@@ -12,7 +12,7 @@ Small and light chrome extension for quick conversion from EUR to HRK.
 
 ### Dependencies
 
-* react-currency-input-field 3.6.10
+* react-currency-input-field ```3.6.10```
 
 ### Installing
 
